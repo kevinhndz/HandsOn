@@ -6,7 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello {{user}} </h1>
+ 
+
+<h1>Información básica del propietario del sitio.</h1> <br>
+
+{% if hay %}
+
+<ul>
+
+    {% for val in contenido.values() %}
+    {{ val}}
+    {%endfor%}
+
+</ul>
+
+{% else %}
+
+    {% for val in contenido.values() %}
+    {{ val}}
+    {%endfor%}
+
+{% endif %}
+
     
 </body>
 </html>
