@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Inicio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-    <div class="card">
-        <h1>Sistema de Información</h1>
-        <form action="/atributos" method="POST">
-            <label>Seleccione un profesor:</label>
-            <select name="campo">
-                <option value="">-- Elige una opción --</option>
-                <option value="kevin">Kevin</option>
-                <option value="maria">Maria</option>
-                <option value="oscar">Oscar</option>
-            </select>
-            <button type="submit">Consultar Información</button>
-        </form>
-    </div>
+
+    <h1>Sistema de Jugadores</h1> <br>
+
+    <form action="/cualidades" method="POST">
+
+    <input type="text" name="nombre" placeholder="tu nombre"> 
+    <br>
+
+    <select name="campo">
+        <option value="">-- Seleccione una Posicion --- </option>
+        <option value="Portero">Portero</option>
+        <option value="Defensa">Defensa</option>
+        <option value="Medio">Medio</option>
+        <option value="Delantero">Delantero</option>
+    </select>
+     <br>
+    <label for="checkbox"> Es Capitan? | Si o No</label><input type="checkbox" name="capitan">
+    <br>
+    <button type="submit">Enviar Datos</button>
+
+
+
+    </form>
+
+    
 </body>
 </html>
