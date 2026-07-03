@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Hello {{user}} </h1>
-    
+    <div class="card">
+        <h1>Sistema de Información</h1>
+        <form action="/atributos" method="POST">
+            <label>Seleccione un profesor:</label>
+            <select name="campo">
+                <option value="">-- Elige una opción --</option>
+                <option value="kevin">Kevin</option>
+                <option value="maria">Maria</option>
+                <option value="oscar">Oscar</option>
+            </select>
+            <button type="submit">Consultar Información</button>
+        </form>
+    </div>
 </body>
 </html>

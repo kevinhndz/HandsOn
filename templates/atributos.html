@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atributos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card">
+        <h1>Info: {{ nombre.capitalize() }}</h1>
+        <ul>
+            {% for key, val in datos.items() %}
+                <li><strong>{{ key }}:</strong> {{ val }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/" class="back-link">← Volver al inicio</a>
+    </div>
+</body>
+</html>
