@@ -192,24 +192,22 @@ def api_reservas():
     return jsonify([dict(fila) for fila in filas])
 
 
-# -------------------------------------------------------
-# PANEL DE ADMINISTRACIÓN — agregado para ver reservas
-# -------------------------------------------------------
 
-ADMIN_PASSWORD = "cinemas2026"  # cambia esto antes de subir a producción
+
+ADMIN_PASSWORD = "cinemas2026"  
 
 @app.route("/admin")
 def admin_login():
-    # Muestra la página del formulario de login
+   
     return render_template("admin_login.html")
 
 @app.route("/admin/reservas", methods=["POST"])
 def admin_reservas():
     password = request.form.get("password", "")
-    # Si la contraseña es incorrecta, regresa al login con mensaje de error
+    
     if password != ADMIN_PASSWORD:
         return render_template("admin_login.html", error="Contraseña incorrecta")
-    # Si es correcta, consulta todas las reservas y las muestra en la tabla
+ 
     db = get_db()
     reservas = db.execute("""
         SELECT folio, pelicula_titulo, hora, nombre, correo,
