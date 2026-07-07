@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservas — Cinemas Valladolid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+<style>
+  .admin-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    padding-bottom: 1rem;
+  }
+  .admin-header h2 { font-size: 2rem; color: var(--gold-light); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { border-bottom: 2px solid rgba(212,175,55,0.3); }
+  th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  td {
+    padding: 0.85rem 1rem;
+    font-size: 0.88rem;
+    color: var(--cream-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .folio-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+  }
+  .total-badge {
+    background: rgba(212,175,55,0.15);
+    color: var(--gold-light);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body style="background: var(--bg);">
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h2>RESERVAS</h2>
+    <span class="total-badge">{{ reservas|length }} reservas totales</span>
+  </div>
+  {% if reservas %}
+  <table>
+    <thead>
+      <tr>
+        <th>Folio</th>
+        <th>Película</th>
+        <th>Hora</th>
+        <th>Asientos</th>
+        <th>Cliente</th>
+        <th>Correo</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in reservas %}
+      <tr>
+        <td><span class="folio-tag">{{ r.folio }}</span></td>
+        <td>{{ r.pelicula_titulo }}</td>
+        <td>{{ r.hora }}</td>
+        <td>{{ r.asientos }}</td>
+        <td>{{ r.nombre }}</td>
+        <td>{{ r.correo }}</td>
+        <td>{{ r.creado_en[:10] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color: var(--muted); text-align:center; margin-top:3rem;">No hay reservas registradas aún.</p>
+  {% endif %}
+</div>
+</body>
+</html>

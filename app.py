@@ -179,8 +179,6 @@ def api_reservar():
 
 @app.route("/api/reservas")
 def api_reservas():
-    """Lista todas las reservas agrupadas por folio. Útil para revisar
-    rápido desde el navegador o para un futuro panel de administración."""
     db = get_db()
     filas = db.execute(
         """
@@ -192,6 +190,35 @@ def api_reservas():
         """
     ).fetchall()
     return jsonify([dict(fila) for fila in filas])
+
+
+# -------------------------------------------------------
+# PANEL DE ADMINISTRACIÓN — agregado para ver reservas
+# -------------------------------------------------------
+
+ADMIN_PASSWORD = "cinemas2026"  # cambia esto antes de subir a producción
+
+@app.route("/admin")
+def admin_login():
+    # Muestra la página del formulario de login
+    return render_template("admin_login.html")
+
+@app.route("/admin/reservas", methods=["POST"])
+def admin_reservas():
+    password = request.form.get("password", "")
+    # Si la contraseña es incorrecta, regresa al login con mensaje de error
+    if password != ADMIN_PASSWORD:
+        return render_template("admin_login.html", error="Contraseña incorrecta")
+    # Si es correcta, consulta todas las reservas y las muestra en la tabla
+    db = get_db()
+    reservas = db.execute("""
+        SELECT folio, pelicula_titulo, hora, nombre, correo,
+               GROUP_CONCAT(asiento) AS asientos, MIN(creado_en) AS creado_en
+        FROM reservas
+        GROUP BY folio
+        ORDER BY creado_en DESC
+    """).fetchall()
+    return render_template("admin_reservas.html", reservas=reservas)
 
 
 init_db()
